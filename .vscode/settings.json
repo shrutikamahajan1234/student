@@ -1,0 +1,10 @@
+{
+    "chat.mcp.serverSampling": {
+        "STUDENT-MANAGEMENT/.vscode/mcp.json: github": {
+            "allowedModels": [
+                "copilotcli/auto",
+                "copilot/auto"
+            ]
+        }
+    }
+}

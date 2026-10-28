@@ -56,7 +56,7 @@
     }
     button:hover { opacity: 0.9; }
     button:active { transform: scale(0.97); }
-    .btn-primary { background: #4f46e5; color: #fff; }
+    #submitBtn { background: #16a34a; color: #fff; }
     .btn-secondary { background: #e2e8f0; color: #334155; }
     .btn-edit { background: #fef3c7; color: #92400e; padding: 7px 12px; margin-right: 6px; }
     .btn-delete { background: #fee2e2; color: #b91c1c; padding: 7px 12px; }
@@ -127,6 +127,7 @@
           <input id="email" type="email" placeholder="Email address" required />
           <input id="course" placeholder="Course (e.g. B.Tech)" required />
           <input id="age" type="number" min="1" placeholder="Age" />
+          <input id="caste" placeholder="Caste" />
         </div>
         <div class="actions">
           <button type="submit" id="submitBtn" class="btn-primary">Add Student</button>
@@ -138,12 +139,12 @@
     <div class="card">
       <div class="toolbar">
         <h2>Students<span class="badge" id="count">0</span></h2>
-        <input id="search" placeholder="🔍 Search by name, email or course" />
+        <input id="search" placeholder="🔍 Search by name, email, course or caste" />
       </div>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Name</th><th>Email</th><th>Course</th><th>Age</th><th>Actions</th></tr>
+            <tr><th>Name</th><th>Email</th><th>Course</th><th>Age</th><th>Caste</th><th>Actions</th></tr>
           </thead>
           <tbody id="studentTable"></tbody>
         </table>

@@ -24,17 +24,24 @@ const reply = (data) => ({
 // READ
 server.tool(
   "list_students",
-  "List all students. Optional search matches name, email or course.",
-  { search: z.string().optional() },
-  async ({ search }) => {
-    let students = await call();
-    if (search) {
-      const q = search.toLowerCase();
-      students = students.filter((s) =>
-        [s.name, s.email, s.course].some((v) => v?.toLowerCase().includes(q))
-      );
-    }
-    return reply(students);
+  "List all students.",
+  {},
+  async () => reply(await call())
+);
+
+// SEARCH
+server.tool(
+  "search_student",
+  "Find students by name, email, course or caste (partial match, case-insensitive).",
+  { query: z.string() },
+  async ({ query }) => {
+    const q = query.toLowerCase();
+    const students = await call();
+    return reply(
+      students.filter((s) =>
+        [s.name, s.email, s.course, s.caste].some((v) => v?.toLowerCase().includes(q))
+      )
+    );
   }
 );
 
@@ -47,20 +54,23 @@ server.tool(
     email: z.string(),
     course: z.string(),
     age: z.number().optional(),
+    caste: z.string().optional(),
   },
-  async (student) => reply(await call("", { method: "POST", body: JSON.stringify(student) }))
+  async (student) =>
+    reply(await call("", { method: "POST", body: JSON.stringify(student) }))
 );
 
 // UPDATE
 server.tool(
   "update_student",
-  "Update a student by id. Use list_students first to find the id.",
+  "Update a student by id. Use search_student or list_students first to find the id.",
   {
     id: z.string(),
     name: z.string().optional(),
     email: z.string().optional(),
     course: z.string().optional(),
     age: z.number().optional(),
+    caste: z.string().optional(),
   },
   async ({ id, ...changes }) =>
     reply(await call(`/${id}`, { method: "PUT", body: JSON.stringify(changes) }))
@@ -69,10 +79,10 @@ server.tool(
 // DELETE
 server.tool(
   "delete_student",
-  "Delete a student by id. Use list_students first to find the id.",
+  "Delete a student by id. Use search_student or list_students first to find the id.",
   { id: z.string() },
   async ({ id }) => reply(await call(`/${id}`, { method: "DELETE" }))
 );
 
 await server.connect(new StdioServerTransport());
-console.error("student-db MCP server running"); // console.log mat use karna
+console.error("student-db MCP server running");
