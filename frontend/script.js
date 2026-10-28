@@ -31,7 +31,7 @@ function renderStudents() {
   let shown = 0;
 
   students.forEach((s, index) => {
-    const matches = [s.name, s.email, s.course, s.caste].some((v) =>
+    const matches = [s.name, s.email, s.course, s.caste, s.phone].some((v) =>
       (v || "").toLowerCase().includes(q)
     );
     if (!matches) return;
@@ -39,7 +39,7 @@ function renderStudents() {
 
     const tr = document.createElement("tr");
 
-    [s.name, s.email, s.course, s.age ?? "", s.caste ?? ""].forEach((value) => {
+    [s.name, s.email, s.course, s.age ?? "", s.caste ?? "", s.phone ?? ""].forEach((value) => {
       const td = document.createElement("td");
       td.textContent = value;
       tr.appendChild(td);
@@ -67,7 +67,7 @@ function renderStudents() {
   if (shown === 0) {
     const tr = document.createElement("tr");
     const td = document.createElement("td");
-    td.colSpan = 6;
+    td.colSpan = 7;
     td.className = "empty";
     td.textContent = q ? "No matching students found." : "No students yet. Add your first student above.";
     tr.appendChild(td);
@@ -92,6 +92,7 @@ form.addEventListener("submit", async (e) => {
     course: document.getElementById("course").value,
     age: Number(document.getElementById("age").value) || undefined,
     caste: document.getElementById("caste").value,
+    phone: document.getElementById("phone").value,
   };
 
   try {
@@ -121,6 +122,7 @@ function editStudent(index) {
   document.getElementById("course").value = s.course;
   document.getElementById("age").value = s.age ?? "";
   document.getElementById("caste").value = s.caste ?? "";
+  document.getElementById("phone").value = s.phone ?? "";
   submitBtn.textContent = "Update Student";
   formTitle.textContent = "Edit Student";
   cancelBtn.style.display = "inline-block";
