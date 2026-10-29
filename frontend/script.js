@@ -31,7 +31,7 @@ function renderStudents() {
   let shown = 0;
 
   students.forEach((s, index) => {
-    const matches = [s.name, s.email, s.course].some((v) =>
+    const matches = [s.name, s.email, s.course, s.phone].some((v) =>
       (v || "").toLowerCase().includes(q)
     );
     if (!matches) return;
@@ -39,7 +39,7 @@ function renderStudents() {
 
     const tr = document.createElement("tr");
 
-    [s.name, s.email, s.course, s.age ?? ""].forEach((value) => {
+    [s.name, s.email, s.course, s.age ?? "", s.phone ?? ""].forEach((value) => {
       const td = document.createElement("td");
       td.textContent = value;
       tr.appendChild(td);
@@ -91,6 +91,7 @@ form.addEventListener("submit", async (e) => {
     email: document.getElementById("email").value,
     course: document.getElementById("course").value,
     age: Number(document.getElementById("age").value) || undefined,
+    phone: document.getElementById("phone").value,
   };
 
   try {
@@ -119,6 +120,7 @@ function editStudent(index) {
   document.getElementById("email").value = s.email;
   document.getElementById("course").value = s.course;
   document.getElementById("age").value = s.age ?? "";
+  document.getElementById("phone").value = s.phone ?? "";
   submitBtn.textContent = "Update Student";
   formTitle.textContent = "Edit Student";
   cancelBtn.style.display = "inline-block";

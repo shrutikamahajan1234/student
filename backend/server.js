@@ -35,6 +35,7 @@ const studentSchema = new mongoose.Schema(
     email: { type: String, required: true, trim: true },
     course: { type: String, required: true, trim: true },
     age: { type: Number, min: 1 },
+    phone: { type: String, trim: true },
   },
   { timestamps: true }
 );
