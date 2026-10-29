@@ -36,7 +36,6 @@ const studentSchema = new mongoose.Schema(
     course: { type: String, required: true, trim: true },
     age: { type: Number, min: 1 },
     caste: { type: String, trim: true },
-    phone: { type: String, trim: true },
   },
   { timestamps: true }
 );
