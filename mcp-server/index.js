@@ -32,14 +32,14 @@ server.tool(
 // SEARCH
 server.tool(
   "search_student",
-  "Find students by name, email, course or caste (partial match, case-insensitive).",
+  "Find students by name, email, course (partial match, case-insensitive).",
   { query: z.string() },
   async ({ query }) => {
     const q = query.toLowerCase();
     const students = await call();
     return reply(
       students.filter((s) =>
-        [s.name, s.email, s.course, s.caste].some((v) => v?.toLowerCase().includes(q))
+        [s.name, s.email, s.course].some((v) => v?.toLowerCase().includes(q))
       )
     );
   }
@@ -54,7 +54,6 @@ server.tool(
     email: z.string(),
     course: z.string(),
     age: z.number().optional(),
-    caste: z.string().optional(),
   },
   async (student) =>
     reply(await call("", { method: "POST", body: JSON.stringify(student) }))
@@ -70,7 +69,6 @@ server.tool(
     email: z.string().optional(),
     course: z.string().optional(),
     age: z.number().optional(),
-    caste: z.string().optional(),
   },
   async ({ id, ...changes }) =>
     reply(await call(`/${id}`, { method: "PUT", body: JSON.stringify(changes) }))

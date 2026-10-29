@@ -127,7 +127,6 @@
           <input id="email" type="email" placeholder="Email address" required />
           <input id="course" placeholder="Course (e.g. B.Tech)" required />
           <input id="age" type="number" min="1" placeholder="Age" />
-          <input id="caste" placeholder="Caste" />
         </div>
         <div class="actions">
           <button type="submit" id="submitBtn" class="btn-primary">Add Student</button>
@@ -139,12 +138,12 @@
     <div class="card">
       <div class="toolbar">
         <h2>Students<span class="badge" id="count">0</span></h2>
-        <input id="search" placeholder="🔍 Search by name, email, course or caste" />
+        <input id="search" placeholder="🔍 Search by name, email, course" />
       </div>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Name</th><th>Email</th><th>Course</th><th>Age</th><th>Caste</th><th>Actions</th></tr>
+            <tr><th>Name</th><th>Email</th><th>Course</th><th>Age</th><th>Actions</th></tr>
           </thead>
           <tbody id="studentTable"></tbody>
         </table>
